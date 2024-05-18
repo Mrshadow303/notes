@@ -3,12 +3,13 @@ from selenium.webdriver.common.keys import Keys
 import time
 #import unittest
 from selenium.webdriver.common.by import By
-from django.test import LiveServerTestCase
+#from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.common.exceptions import WebDriverException
 
 MAX_WAIT = 10
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
     def test_layout_and_styling(self):
         #张三访问首页
         self.browser.get(self.live_server_url)
@@ -17,7 +18,7 @@ class NewVisitorTest(LiveServerTestCase):
         #她看到输入框完美地居中显示
         inputbox = self.browser.find_element(By.ID,'id_new_item')
         self.assertAlmostEqual(
-            inputbox.location['x']+inputbox.size['width']/2 ,
+            inputbox.location['x']+inputbox.size['width'] / 2 ,
             512,
             delta=10
         )
@@ -27,7 +28,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.wait_for_row_in_list_table('1:testing')
         inputbox = self.browser.find_element(By.ID,'id_new_item')
         self.assertAlmostEqual(
-            inputbox.location['x']+inputbox.size['width']/2 ,
+            inputbox.location['x']+inputbox.size['width'] / 2 ,
             512,
             delta=10
         )
